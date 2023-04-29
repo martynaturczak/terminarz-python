@@ -1,8 +1,9 @@
 from nicegui import Client, ui, app
 from weather import Weather
+from planner import Planner
 import datetime
 import requests
-
+import json 
 
 url = "https://api.open-meteo.com/v1/forecast?latitude=51.10&longitude=17.03&hourly=temperature_2m&hourly=relativehumidity_2m&hourly=cloudcover&hourly=windspeed_10m&hourly=precipitation_probability&&forecast_days=2"
 response = requests.get(url).json()
@@ -16,20 +17,30 @@ minutes = now.strftime("%M")
 day = now.strftime("%A")
 app.add_static_files('/img', 'img')
 
+content = open('calendar.json')
+events = json.load(content)
+
+planner = Planner(events)
+planner.create_table()
+print(planner.table)
+
+table = planner.table
+
 @ui.page('/')
 async def main_page(client: Client):
     await client.connected()
     await ui.run_javascript('document.getElementById("3").style.padding = "0px"')
     with ui.column().classes("w-screen h-screen grid grid-rows-2 bg-[#9A5F86] font-mono"):
         with ui.row().classes("w-full h-full"):
-            calendar = ui.date()
+            calendar = ui.date(on_change=lambda e: planner.update_table(date = e.value, table = table))
             calendar.classes("w-full h-full")
             calendar.props('first-day-of-week="1" color=teal-10')
             calendar.run_method('setToday')
         with ui.row().classes("w-full h-full grid grid-cols-2"):
             with ui.column().classes("w-full h-full"):
                 with ui.card().classes("w-full h-full bg-[#FFFCFE]"):
-                    ui.label("tekst 1")
+                    # ui.label(events['dates'][0]['2023-04-26']['events'][0]['from'])
+                    ui.table(columns=planner.table._props['columns'],rows=planner.table._props['rows'],row_key=planner.table.row_key)
             with ui.column().classes("w-full h-full"):
                 with ui.card().classes("w-full h-full grid grid-rows-2 bg-[#FFFCFE]"):
                     with ui.row().classes("w-full h-full grid grid-cols-5"):

@@ -58,7 +58,7 @@ class Weather:
         hours = []
         temperature = []
         for i in range(0, 24, 3):
-            hours.append((self.time[self.index + i])[-5:])
+            hours.append((self.time[self.index + 1 + i])[-5:])
             temperature.append(self.temperature[self.index + i])
         ui.chart({
                     'title': False,
