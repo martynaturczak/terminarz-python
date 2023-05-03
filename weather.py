@@ -38,16 +38,16 @@ class Weather:
         if self.precipitation_probability[self.index] > 60:
             self.img = "img/przelotny_deszczyk.png"
             self.message = "Passing rain"
-        if self.precipitation_probability[self.index] > 80 and self.cloudcover[self.index] > 80 and self.humidity > 50:
+        elif self.precipitation_probability[self.index] > 80 and self.cloudcover[self.index] > 80 and self.humidity > 50:
             self.img = "img/deszczyk.png"
             self.message = "Rainy"
-        if self.temperature[self.index] > 20 and self.cloudcover[self.index] < 50:
+        elif self.temperature[self.index] > 20 and self.cloudcover[self.index] < 50:
             self.img = "img/sloneczka.png"
             self.message = "Sunny"
-        if self.temperature[self.index] > 15 and self.cloudcover[self.index] > 20:
+        elif self.temperature[self.index] > 12 and self.cloudcover[self.index] > 20 and self.cloudcover[self.index] < 60:
             self.img = "img/chmurki_za_sloneczkiem.png"
             self.message = "Partially sunny"
-        if self.windspeed[self.index] > 10 and self.humidity[self.index] > 90 and self.precipitation_probability[self.index] > 90:
+        elif self.windspeed[self.index] > 10 and self.humidity[self.index] > 90 and self.precipitation_probability[self.index] > 90:
             self.img = "img/burza.png"
             self.message = "Thunderstorm"
         else:

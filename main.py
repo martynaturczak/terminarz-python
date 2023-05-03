@@ -21,10 +21,6 @@ content = open('calendar.json')
 events = json.load(content)
 
 planner = Planner(events)
-planner.create_table()
-print(planner.table)
-
-table = planner.table
 
 @ui.page('/')
 async def main_page(client: Client):
@@ -32,15 +28,14 @@ async def main_page(client: Client):
     await ui.run_javascript('document.getElementById("3").style.padding = "0px"')
     with ui.column().classes("w-screen h-screen grid grid-rows-2 bg-[#9A5F86] font-mono"):
         with ui.row().classes("w-full h-full"):
-            calendar = ui.date(on_change=lambda e: planner.update_table(date = e.value, table = table))
+            calendar = ui.date(on_change=lambda e: planner.update_table(date = e.value))
             calendar.classes("w-full h-full")
             calendar.props('first-day-of-week="1" color=teal-10')
             calendar.run_method('setToday')
         with ui.row().classes("w-full h-full grid grid-cols-2"):
             with ui.column().classes("w-full h-full"):
                 with ui.card().classes("w-full h-full bg-[#FFFCFE]"):
-                    # ui.label(events['dates'][0]['2023-04-26']['events'][0]['from'])
-                    ui.table(columns=planner.table._props['columns'],rows=planner.table._props['rows'],row_key=planner.table.row_key)
+                    planner.create_table()
             with ui.column().classes("w-full h-full"):
                 with ui.card().classes("w-full h-full grid grid-rows-2 bg-[#FFFCFE]"):
                     with ui.row().classes("w-full h-full grid grid-cols-5"):
@@ -62,4 +57,4 @@ async def main_page(client: Client):
                                 ui.label(weather.message).classes("w-full text-right")
                     with ui.row().classes("w-full h-full"):
                         weather.create_temperature_chart()
-ui.run(port=1236)
+ui.run(port=1237)
