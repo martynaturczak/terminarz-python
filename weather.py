@@ -41,8 +41,8 @@ class Weather:
         elif self.precipitation_probability[self.index] > 80 and self.cloudcover[self.index] > 80 and self.humidity > 50:
             self.img = "img/deszczyk.png"
             self.message = "Rainy"
-        elif self.temperature[self.index] > 20 and self.cloudcover[self.index] < 50:
-            self.img = "img/sloneczka.png"
+        elif self.temperature[self.index] > 10 and self.cloudcover[self.index] < 50:
+            self.img = "img/sloneczko.png"
             self.message = "Sunny"
         elif self.temperature[self.index] > 12 and self.cloudcover[self.index] > 20 and self.cloudcover[self.index] < 60:
             self.img = "img/chmurki_za_sloneczkiem.png"

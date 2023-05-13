@@ -1,45 +1,63 @@
 {
-    "dates":[
-       {
-          "2023-05-03":{
-             "events":[
-                {
-                   "from":"12:00",
-                   "to":"13:00",
-                   "description":"text"
-                },
-                {
-                   "from":"14:00",
-                   "to":"15:00",
-                   "description":"text"
-                },
-                {
-                   "from":"15:00",
-                   "to":"16:00",
-                   "description":"text"
-                }
-             ]
-          },
-          "2023-05-04":{
-            "events":[
-               {
-                  "from":"12:00",
-                  "to":"13:00",
-                  "description":"123"
-               },
-               {
-                  "from":"14:00",
-                  "to":"15:00",
-                  "description":"123"
-               },
-               {
-                  "from":"15:00",
-                  "to":"16:00",
-                  "description":"123"
-               }
-            ]
-         }
-
-       }
+    "dates": [
+        {
+            "2023-05-11": {
+                "events": [
+                    {
+                        "from": "12:00",
+                        "to": "13:00",
+                        "description": "text"
+                    },
+                    {
+                        "from": "14:00",
+                        "to": "15:00",
+                        "description": "text"
+                    },
+                    {
+                        "from": "15:00",
+                        "to": "16:00",
+                        "description": "text"
+                    },
+                    {
+                        "from": "14:00",
+                        "to": "15:00",
+                        "description": "text"
+                    }
+                ]
+            },
+            "2023-05-12": {
+                "events": [
+                    {
+                        "from": "12:00",
+                        "to": "13:00",
+                        "description": "123"
+                    },
+                    {
+                        "from": "14:00",
+                        "to": "15:00",
+                        "description": "123"
+                    },
+                    {
+                        "from": "15:00",
+                        "to": "16:00",
+                        "description": "123"
+                    }
+                ]
+            },
+            "2023-05-13": {
+                "events": [
+                    {
+                        "from": "12:00",
+                        "to": "13:00",
+                        "description": "spotkanie"
+                    },
+                    {
+                        "from": "14:00",
+                        "to": "15:00",
+                        "description": "praca"
+                    }
+                ]
+            }
+        }
     ]
- }
+}

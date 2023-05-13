@@ -1,6 +1,7 @@
 from nicegui import Client, ui, app
 from weather import Weather
 from planner import Planner
+from event import Event
 import datetime
 import requests
 import json 
@@ -36,6 +37,23 @@ async def main_page(client: Client):
             with ui.column().classes("w-full h-full"):
                 with ui.card().classes("w-full h-full bg-[#FFFCFE]"):
                     planner.create_table()
+                    with ui.dialog() as dialog, ui.card():
+                        ui.label('Time')
+                        event = Event()
+                        ui.input(label='from', placeholder='ex. 12:00',
+                        validation={'Input too long': lambda value: len(value) <= 5},
+                        on_change=lambda e: event.set_start_time(e.value))
+                        ui.input(label='to', placeholder='ex. 13:00',
+                        validation={'Input too long': lambda value: len(value) <= 5},
+                        on_change=lambda e: event.set_end_time(e.value))
+                        ui.label('Event')
+                        ui.input(label='event', placeholder='add text',
+                        validation={'Input too long': lambda value: len(value) < 20},
+                        on_change=lambda e: event.set_description(e.value))
+                        # result = ui.label()
+                        ui.button('Add', on_click=lambda e: planner.add_event(calendar.value, from1 = event.start_time,  to = event.end_time,  description = event.description))
+                        ui.button('Close', on_click=dialog.close)
+                    ui.button('Add event', on_click=dialog.open)
             with ui.column().classes("w-full h-full"):
                 with ui.card().classes("w-full h-full grid grid-rows-2 bg-[#FFFCFE]"):
                     with ui.row().classes("w-full h-full grid grid-cols-5"):
@@ -57,4 +75,4 @@ async def main_page(client: Client):
                                 ui.label(weather.message).classes("w-full text-right")
                     with ui.row().classes("w-full h-full"):
                         weather.create_temperature_chart()
-ui.run(port=1237)
+ui.run(port=1238)
