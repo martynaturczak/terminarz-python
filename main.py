@@ -27,11 +27,11 @@ planner = Planner(events)
 async def main_page(client: Client):
     await client.connected()
     await ui.run_javascript('document.getElementById("3").style.padding = "0px"')
-    with ui.column().classes("w-screen h-screen grid grid-rows-2 bg-[#9A5F86] font-mono"):
+    with ui.column().classes("w-screen h-screen grid grid-rows-2 bg-[#424549] font-mono"):
         with ui.row().classes("w-full h-full"):
             calendar = ui.date(on_change=lambda e: planner.update_table(date = e.value))
             calendar.classes("w-full h-full")
-            calendar.props('first-day-of-week="1" color=teal-10')
+            calendar.props('first-day-of-week="1" color=grey-10')
             calendar.run_method('setToday')
         with ui.row().classes("w-full h-full grid grid-cols-2"):
             with ui.column().classes("w-full h-full"):

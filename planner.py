@@ -16,18 +16,20 @@ class Planner:
         self.dates = planner_data['dates']
     @ui.refreshable
     def create_table(self):
-        ui.table(columns=self.columns, rows=self.rows, row_key='name')
-
+        ui.table(columns=self.columns, rows=self.rows, row_key='name', pagination=4).style('width: 800px')
     def update_table(self, date = None, table = None):
         content = open('calendar.json')
         events = json.load(content)
         self.dates=events['dates']
-        events = self.dates[0][date]['events']
         rows = []
-        for event in events:
-            rows.append({
-                'time':event['from'] + '-' + event['to'], 'events':event['description']
-            })
+        try:
+            events = self.dates[0][date]['events']
+            for event in events:
+                rows.append({
+                    'time':event['from'] + '-' + event['to'], 'events':event['description']
+                })
+        except:
+            self.add_date(date)
         self.rows = rows
         self.create_table.refresh()
     def add_event(self, date, from1 = None, to = None, description = None):
@@ -45,7 +47,18 @@ class Planner:
         with open("calendar.json", "w") as outfile:
             json.dump(events, outfile)
         self.update_table(date)
-         
+    def add_date(self, date):
+        content = open('calendar.json')
+        events = json.load(content)
+        content.close()
+        events['dates'][0][date] = {"events": []}
+        outfile = open("calendar.json", "w")
+        json.dump(events, outfile)
+        outfile.close()
+        content = open('calendar.json')
+        events = json.load(content)
+        self.dates = events["dates"]
+        content.close()
 
 
 
